@@ -1,0 +1,24 @@
+rocketDetector
+
+This simple CNN takes an array of 2 dimensional arrays and predicts whether there is a rocket in the sample of not.
+
+Installation
+============
+It is recommended you install this in a virtual environment, using the following commands.
+
+
+
+#setup the virtual environment with the python3.7 interpreter
+#normally at /usr/local/bin/python3.7 or similar
+virtualenv rocketDetector -p ${PATH_TO}/python3.7
+cd rocketDetector
+#acticate the virtual environment
+source bin/activate
+export PYTHONPATH=${PWD}/lib/python3.7/site-packages
+#Install required libraries
+pip install tensorflow
+pip install jupyter-lab
+ipython kernel install --name "rocketDetector" --user
+jupyter-lab
+
+

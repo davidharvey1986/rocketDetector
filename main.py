@@ -1,18 +1,33 @@
-from keras.callbacks import CSVLogger
-from testTrainSplit import getTestTrainSets
-from mainModel import simpleModel, mainModel
+'''
+The main function to train the CNN. In its state it is run in a monte-carlo fashion.
+This monte-carlo randomly cuts the test-train samples, each time with a different seed.
+This allows me to see the sensitivity of the accuracy of the model to the training set (and by extension the test data)
+It also allows me to run the program in the background over the weekend.
+
+SYNTAX: (from command line in bash)
+
+nohup python main.py > mainModel.log &
+
+
+
+'''
+
 from globalVariables import *
 
 
-def monteCarlo():
+def monteCarlo(nMonteCarlo=10):
+    '''
+    Loop through the main function nMonteCarlo times.
     
-    for i in range(1,10):
+    '''
+    
+    for i in range(1,nMonteCarlo):
         fileRootName = "pickles/simple_doubleData_%i" % i
         main(seed=i,fileRootName=fileRootName)
 
 def main( nEpochs=20, testTrainSplit=0.15,\
           fileRootName=None, database=None, \
-          dropout=0., nChannels=3, seed=1):
+          dropout=0., seed=1):
     '''
     The main function that trains the model 
     
@@ -22,12 +37,9 @@ def main( nEpochs=20, testTrainSplit=0.15,\
     - nEpochs : integer : the number of epochs the will train the algorithm
     - testTrainSplit : float : the ratio of test to training split 
     - fileRootName : string : root name for the pickled training sample of clusters
-    - nMonteCarlo : the number of times the algorithms monte carlos the test - train split to understand
-                    the distribution of estimates.
     - dropout : integer : the dropout rate of neurons in the network to avoid overfitting
-    - nChannels : float : the number of channels of data to go in to the CNN. 
-                        (1, 2, 3: total, xray, baryonic matter)
     - database : string : the database of test and train samples.
+    - seed : integer : the seed for the random number generator to split the test and training sets.
     
     '''
     

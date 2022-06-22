@@ -1,3 +1,5 @@
+#inception modules for the very involved CNN
+
 from globalVariables import *
 
 

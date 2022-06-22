@@ -1,3 +1,13 @@
+'''
+The various models that i have tested and implemented.
+
+simpleModel : simple CNN 
+simpleModel_TypeA : simple CNN with additional 7x1 convolutional layer
+mainModel : extreely involved CNN with multiple inception modules.
+
+'''
+
+
 from globalVariables import *
 import inceptionModules 
 
